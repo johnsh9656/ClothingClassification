@@ -51,7 +51,7 @@ def upload_file():
 
     try:
         # load the model
-        model_path = 'models/model.keras'
+        model_path = 'models/prediction_model.keras'
         model = load_model(model_path)
         print("Loaded model")
 
