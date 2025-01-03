@@ -8,7 +8,6 @@ import os  # OS module for handling file paths and directories
 
 
 # Load the model
-model = tf.keras.models.load_model('clothing_model.h5')
 class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
                'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 
@@ -29,7 +28,7 @@ def main():
     return {"message": "Welcome to the file upload server"}
 
 # file upload route for backend
-@app.route('./uploadFile', methods=['POST'])
+@app.route('/uploadFile', methods=['POST'])
 def upload_file():
     # ensure the request has a file attached
     if 'file' not in request.files:
@@ -48,6 +47,8 @@ def upload_file():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(script_dir, file_path)
 
+    print("benchmark")
+
     try:
         # load the model
         model_path = 'models/model.keras'
@@ -58,6 +59,7 @@ def upload_file():
         img = Image.open(file).convert('L').resize((28, 28))
         img_array = np.array(img) / 255.0
         img_array = np.expand_dims(img_array, axis=0)
+        print("load the image")
 
         # make predictions
         predictions = model.predict(img_array)
