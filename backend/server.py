@@ -63,8 +63,16 @@ def upload_file():
 
         # make predictions
         predictions = model.predict(img_array)
+
+        # debugging
+        print(f"Predictions: {predictions[0]}")
+        print(f"Predicted index: {np.argmax(predictions[0])}")
+
         predicted_label = class_names[np.argmax(predictions[0])]
-        confidence = np.max(predictions[0])
+        confidence = float(np.max(predictions[0]))
+
+        print(f"label: {predicted_label}")
+        print(f"confidence: {confidence}")
 
         return jsonify({'message': 'File uploaded successfully', 'prediction': predicted_label, 'confidence': confidence}), 200
     except Exception as e:
