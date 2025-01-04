@@ -1,23 +1,22 @@
 "use client"
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+// pages/index.tsx
+import { useState } from 'react';
 
-const Home: React.FC = () => {
+export default function Home() {
   const [file, setFile] = useState<File | null>(null);
-  const [prediction, setPrediction] = useState<string | null>(null);
+  const [prediction, setPrediction] = useState<string>('');
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0] || null;
-    setFile(selectedFile);
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setFile(event.target.files[0]);
+    }
   };
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  const handleUpload = async () => {
     if (!file) {
-      alert('Please select a file first.');
+      alert('Please select a file first!');
       return;
     }
-
-    console.log("attempt submit");
 
     const formData = new FormData();
     formData.append('file', file);
@@ -34,21 +33,31 @@ const Home: React.FC = () => {
 
       const data = await response.json();
       setPrediction(data.prediction);
-    } catch (err) {
-      console.error(err);
-      alert('An error occurred while making the prediction.');
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      setPrediction('Error making prediction.');
     }
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className='flex flex-col justify-center text-cente text-content'>
+      <h1>Clothing Classifier</h1>
+      <h2 className='text-red-500 '>hello</h2>
+      <section>
+        <h2>Upload an Image</h2>
         <input type="file" accept="image/*" onChange={handleFileChange} />
-        <button type="submit">Predict</button>
-      </form>
-      {prediction && <p>Prediction: {prediction}</p>}
+        {file && <p>Selected file: {file.name}</p>}
+        <button onClick={handleUpload} className='mt-3 p-3 cursor-pointer'>
+          Upload and Predict
+        </button>
+      </section>
+
+      <section className='p-5'>
+        <h2>Prediction Result</h2>
+        <div className='p-3 border-solid border-red-500 rounded-md bg-gray-200'>
+          {prediction || 'No prediction yet.'}
+        </div>
+      </section>
     </div>
   );
-};
-
-export default Home;
+}
