@@ -2,9 +2,15 @@
 // pages/index.tsx
 import { useState } from 'react';
 import UploadArea from './Components/UploadArea';
+import PredictionCard from './Components/PredictionCard';
+
+export interface Prediction {
+  classification: String;
+  confidence: Number;
+}
 
 export default function Home() {
-  // predictiondata
+  const [predictionData, setPredictionData] = useState<Prediction[]>([])
 
   const [prediction, setPrediction] = useState<string>('');
 
@@ -18,6 +24,10 @@ export default function Home() {
         <div className='p-3 border-solid border-red-500 rounded-md bg-gray-200'>
           {prediction || 'No prediction yet.'}
         </div>
+
+        {predictionData.map((prediction, _) => (
+          <PredictionCard prediction={prediction} />
+        ))}
       </section>
     </main>
   );
