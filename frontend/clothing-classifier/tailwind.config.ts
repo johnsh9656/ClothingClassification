@@ -18,6 +18,8 @@ export default {
       },
     },
     dropShadow: {
+      customBigger: '6px 6px rgb(0, 0, 0)',
+      hoverBigger: '14px 14px rgb(0, 0, 0)',
       custom: '4px 4px rgb(0, 0, 0)',
       hover: '10px 10px rgb(0, 0, 0)',
     }
