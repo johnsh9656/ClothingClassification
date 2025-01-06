@@ -17,6 +17,10 @@ export default {
         accenthover: "#434ec8",
       },
     },
+    dropShadow: {
+      custom: '4px 4px rgb(0, 0, 0)',
+      hover: '10px 10px rgb(0, 0, 0)',
+    }
   },
   plugins: [],
 } satisfies Config;

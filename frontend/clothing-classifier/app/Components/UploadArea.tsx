@@ -70,7 +70,7 @@ export default function UploadArea({ predictionData, setPredictionData }:UploadA
   
 
   return (
-    <section className='w-[80vw] md:w-[36rem] flex flex-col justify-center bg-altbackground rounded-2xl p-5 lg:p-6 gap-4 text-content border-black border-solid border-2'>
+    <section className='w-[80vw] md:w-[36rem] flex flex-col justify-center bg-altbackground rounded-2xl p-5 lg:p-6 gap-4 text-content border-black border-solid border-2 drop-shadow-custom hover:drop-shadow-hover transition-all duration-150'>
       <h2 className='text-left font-semibold'>Upload an Image:</h2>
       <div className='flex flex-row justify-between'>
         <label

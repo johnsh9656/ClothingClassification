@@ -8,7 +8,7 @@ interface PredictionCardProps {
 
 export default function PredictionCard({ prediction }: PredictionCardProps) {
   return (
-    <div className='flex flex-col md:flex-row items-center md:items-start bg-altbackground rounded-2xl p-4 gap-y-2 gap-x-4 border-black border-solid border-2'>
+    <div className='flex flex-col md:flex-row items-center md:items-start bg-altbackground rounded-2xl p-4 gap-y-2 gap-x-4 border-black border-solid border-2 drop-shadow-custom hover:drop-shadow-hover transition-all duration-150'>
         <div className=' md:max-w-[50%]'>
             <Image 
                 src={prediction.path || ""}
