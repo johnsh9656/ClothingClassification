@@ -5,28 +5,23 @@ import UploadArea from './Components/UploadArea';
 import PredictionCard from './Components/PredictionCard';
 
 export interface Prediction {
-  classification: String;
+  filename: string;
+  classification: string;
   confidence: Number;
+  path?: string;
 }
 
 export default function Home() {
   const [predictionData, setPredictionData] = useState<Prediction[]>([])
 
-  const [prediction, setPrediction] = useState<string>('');
-
   return (
     <main className='flex flex-col text-center items-center text-content min-h-screen'>
       <h1 className='mt-16 mb-10 text-content text-4xl font-bold '>Clothing Classifier</h1>
-      <UploadArea setPrediction={setPrediction} />
+      <UploadArea predictionData={predictionData} setPredictionData={setPredictionData} />
 
-      <section className='p-5'>
-        <h2 className=''>Prediction Result</h2>
-        <div className='p-3 border-solid border-red-500 rounded-md bg-gray-200'>
-          {prediction || 'No prediction yet.'}
-        </div>
-
+      <section className='flex flex-col gap-4 p-5 w-[80vw]'>
         {predictionData.map((prediction, _) => (
-          <PredictionCard prediction={prediction} />
+          <PredictionCard key={_} prediction={prediction} />
         ))}
       </section>
     </main>

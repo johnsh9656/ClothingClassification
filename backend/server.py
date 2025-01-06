@@ -74,7 +74,7 @@ def upload_file():
         print(f"label: {predicted_label}")
         print(f"confidence: {confidence}")
 
-        return jsonify({'message': 'File uploaded successfully', 'prediction': predicted_label, 'confidence': confidence}), 200
+        return jsonify({'message': 'File uploaded successfully', 'classification': predicted_label, 'confidence': confidence}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

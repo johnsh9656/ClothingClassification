@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { Prediction } from '../page';
 
 interface UploadAreaProps {
-  setPrediction: React.Dispatch<React.SetStateAction<string>>;
+  predictionData: Prediction[];
+  setPredictionData: React.Dispatch<React.SetStateAction<Prediction[]>>;
 }
 
-export default function UploadArea({ setPrediction }:UploadAreaProps) {
+export default function UploadArea({ predictionData, setPredictionData }:UploadAreaProps) {
   
   const [file, setFile] = useState<File | null>(null);
 
@@ -34,10 +36,33 @@ export default function UploadArea({ setPrediction }:UploadAreaProps) {
       }
 
       const data = await response.json();
-      setPrediction(data.prediction);
+
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        const imageDataUrl = fileReader.result as string;
+
+        const newPrediction: Prediction = {
+          filename: file.name,
+          classification: data.classification,
+          confidence: data.confidence,
+          path: imageDataUrl,
+        };
+  
+        setPredictionData((predictionData) => [newPrediction, ...predictionData]);
+      }
+
+      
     } catch (error) {
       console.error('Error uploading file:', error);
-      setPrediction('Error making prediction.');
+
+      const errorPrediction: Prediction = {
+        filename: file.name,
+        classification: 'Error',
+        confidence: 0,
+      };
+      
+      setPredictionData((predictionData) => [errorPrediction, ...predictionData]);
     }
 
   };
