@@ -1,16 +1,28 @@
-1. Creating a python virtual environment:
+## Backend Setup
 
+1. Naviage to the backend directory
+    ```bash
+    cd ./backend
+    ```
+
+2. Create a python virtual environment:
 Windows:
-py -3 -m venv .venv
-.venv\Scripts\activate
-
+    ```bash
+    py -3 -m venv .venv
+    .venv\Scripts\activate
+    ```
 Redhat based Linux:
-python3 -m venv .venv
-source .venv/bin/activate
+    ```bash
+    python3 -m venv .venv
+    source .venv/bin/activate
+    ```
 
+3. Install dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-2. Download dependencies (please do this every time before):
-pip install -r requirements.txt
-
-3. Run the server
-python server.py
+4. Run the server
+    ```bash
+    python server.py
+    ```
