@@ -1,8 +1,8 @@
 ## Frontend Setup
 
-1. Navigate to the frontend directory
+1. Navigate to the app in the frontend directory
     ```bash
-    ./frontend
+    ./frontend/clothing-classifier
     ```
 
 2. Install dependencies
