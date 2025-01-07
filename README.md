@@ -1,4 +1,4 @@
-# Clothing Classifier 
+# Full-Stack Clothing Classifier Web App
 
 A full-stack web application that uses a machine learning model, trained with the Fashion MNIST dataset to classify uploaded images of clothing into predefined categories. The application displays the most likely classification along with the top 5 classifications and their associated probabilities.
 
