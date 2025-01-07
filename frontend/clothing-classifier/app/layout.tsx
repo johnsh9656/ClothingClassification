@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Clothing Classifier",
-  description: "Made with Next.js, Flask, Tensorflow",
+  description: "Full-stack web app: Next.js, Flask, Tensorflow",
 };
 
 export default function RootLayout({
