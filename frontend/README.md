@@ -2,7 +2,7 @@
 
 1. Navigate to the app in the frontend directory
     ```bash
-    ./frontend/clothing-classifier
+    cd ./frontend/clothing-classifier
     ```
 
 2. Install dependencies
