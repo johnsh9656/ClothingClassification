@@ -47,29 +47,25 @@ def upload_file():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(script_dir, file_path)
 
-    print("benchmark")
-
     try:
         # load the model
-        model_path = 'models/prediction_model.keras'
+        model_path = 'models/probability_model.keras'
         model = load_model(model_path)
-        print("Loaded model")
+        print(model.summary())
 
-        # load the image
+        # load and preprocess  the image
         img = Image.open(file).convert('L').resize((28, 28))
         img_array = np.array(img) / 255.0
+        img_array = 1 - img_array
         img_array = np.expand_dims(img_array, axis=0)
-        print("load the image")
 
         # make predictions
-        predictions = model.predict(img_array)
+        probabilities = model.predict(img_array)
+        print(f"Raw model output: {probabilities}")
+        print(f"Probabilities sum: {np.sum(probabilities)}")  # Should be ~1.0
 
-        # debugging
-        print(f"Predictions: {predictions[0]}")
-        print(f"Predicted index: {np.argmax(predictions[0])}")
-
-        predicted_label = class_names[np.argmax(predictions[0])]
-        confidence = float(np.max(predictions[0]))
+        predicted_label = class_names[np.argmax(probabilities[0])]
+        confidence = float(np.max(probabilities)) * 100
 
         print(f"label: {predicted_label}")
         print(f"confidence: {confidence}")
