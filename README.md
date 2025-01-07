@@ -42,5 +42,6 @@ A full-stack web application that uses a machine learning model, trained with th
     ```bash
     git clone https://github.com/johnsh9656/ClothingClassification.git
     ```
-2. Follow the instructions in /backend to set up the backend
-3. Follow the instructions in /fronten to set up the frontend
+2. Follow the instructions in ./backend to set up the backend
+3. Follow the instructions in ./frontend to set up the frontend
+4. Visit [http://localhost:3000](http://localhost:3000)
