@@ -46,6 +46,7 @@ export default function UploadArea({ predictionData, setPredictionData }:UploadA
           filename: file.name,
           classification: data.classification,
           confidence: data.confidence,
+          predictions: data.predictions,
           path: imageDataUrl,
         };
   
@@ -58,8 +59,9 @@ export default function UploadArea({ predictionData, setPredictionData }:UploadA
 
       const errorPrediction: Prediction = {
         filename: file.name,
-        classification: 'Error',
-        confidence: 0,
+        classification: "Error!",
+        confidence: 100,
+        predictions: {}
       };
       
       setPredictionData((predictionData) => [errorPrediction, ...predictionData]);

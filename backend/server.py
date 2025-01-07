@@ -34,10 +34,8 @@ def upload_file():
     if 'file' not in request.files:
         return jsonify({"error": "No file part"}), 400
     
-    # get the file name
     file = request.files['file']
 
-    # no empty name files
     if file.filename == '':
         return jsonify({"error": "No selected  file"}), 400
     
@@ -51,9 +49,8 @@ def upload_file():
         # load the model
         model_path = 'models/probability_model.keras'
         model = load_model(model_path)
-        print(model.summary())
 
-        # load and preprocess  the image
+        # load and preprocess the image
         img = Image.open(file).convert('L').resize((28, 28))
         img_array = np.array(img) / 255.0
         img_array = 1 - img_array
@@ -61,7 +58,9 @@ def upload_file():
 
         # make predictions
         probabilities = model.predict(img_array)
+
         print(f"Raw model output: {probabilities}")
+        predictions = {class_names[i]: float(probabilities[0][i]) for i in range(len(class_names))}
         print(f"Probabilities sum: {np.sum(probabilities)}")  # Should be ~1.0
 
         predicted_label = class_names[np.argmax(probabilities[0])]
@@ -70,7 +69,12 @@ def upload_file():
         print(f"label: {predicted_label}")
         print(f"confidence: {confidence}")
 
-        return jsonify({'message': 'File uploaded successfully', 'classification': predicted_label, 'confidence': confidence}), 200
+        return jsonify({
+            'message': 'File uploaded successfully', 
+            'predictions':  predictions,
+            'classification': predicted_label, 
+            'confidence': confidence
+        }), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

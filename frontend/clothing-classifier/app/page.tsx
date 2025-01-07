@@ -7,7 +7,8 @@ import PredictionCard from './Components/PredictionCard';
 export interface Prediction {
   filename: string;
   classification: string;
-  confidence: Number;
+  confidence: number;
+  predictions: { [label: string]: number};
   path?: string;
 }
 
